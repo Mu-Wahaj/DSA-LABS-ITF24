@@ -43,7 +43,7 @@ int main() {
     
     cout << "Testing copy constructor:" << endl;
     Student testStudent(101, "Test", 2);
-    printStudent(testStudent);
+    printStudent(testStudent); 
     
     cout << "Testing assignment operator:" << endl;
     Student s1(102, "Original", 2);

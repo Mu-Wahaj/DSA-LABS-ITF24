@@ -36,5 +36,6 @@ public:
     // lab 03 tasks
     sorted intersection(const sorted &list2) const;
     bool isSubset(const sorted &list2) const;
+    sorted difference(const sorted &list2) const;
 };
 #endif

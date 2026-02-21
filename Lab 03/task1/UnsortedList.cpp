@@ -263,21 +263,49 @@ bool UnsortedList::isSubset(const UnsortedList &list2) const
     for (int i = 0; i < currentSize; i++)
     {
         bool found = false;
-
-        for (int j = 0; j < list2.currentSize; j++)
+        int j = 0;
+        
+        // Using while loop with compound condition
+        while (j < list2.currentSize && !found)
         {
-            if (arr[i] == list2.arr[j])
-            {
-                found = true;
-                break;
-            }
+            found = (arr[i] == list2.arr[j]);
+            j++;
         }
-
+        
         if (!found)
         {
             return false;
         }
     }
-
+    
     return true;
+}
+
+UnsortedList UnsortedList::difference(const UnsortedList& list2) const
+{
+    UnsortedList result(maxSize);
+    
+    for (int i = 0; i < currentSize; i++)
+    {
+        bool foundInList2 = false;
+        int j = 0;
+        
+        // Continue searching until found OR end of list
+        while (j < list2.currentSize && !foundInList2)
+        {
+            if (arr[i] == list2.arr[j])
+            {
+                foundInList2 = true;
+            }
+            j++;
+        }
+        
+        if (!foundInList2)
+        {
+            result.arr[result.currentSize] = arr[i];
+            result.currentSize++;
+        }
+    }
+    
+    return result;
 }

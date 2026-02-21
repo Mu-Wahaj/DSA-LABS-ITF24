@@ -10,7 +10,7 @@ int main()
     cout << endl;
     list1.insert(5);
     list1.insert(3);
-    list1.insert(7);
+    list1.insert(6);
     list1.insert(3);
     list1.insert(9);
 

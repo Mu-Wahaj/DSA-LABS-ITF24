@@ -363,3 +363,39 @@ bool sorted::isSubset(const sorted& list2) const
         return false;
 }
 
+     sorted sorted::difference(const sorted &list2) const
+    {
+        sorted result(maxSize);
+
+        int i = 0;
+        int j = 0;
+
+        while (i < currentSize && j < list2.currentSize)
+        {
+            if (arr[i] == list2.arr[j])
+            {
+                i++;
+                j++;
+            }
+            else if (arr[i] < list2.arr[j])
+            {
+                result.arr[result.currentSize] = arr[i];
+                result.currentSize++;
+                i++;
+            }
+            else
+            {
+                j++;
+            }
+        }
+
+        // Add remaining elements from this list
+        while (i < currentSize)
+        {
+            result.arr[result.currentSize] = arr[i];
+            result.currentSize++;
+            i++;
+        }
+
+        return result;
+    }

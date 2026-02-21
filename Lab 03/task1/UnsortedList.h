@@ -29,5 +29,6 @@ public:
     // LAB 03 TASKS
     UnsortedList intersection(const UnsortedList &list2) const;
     bool isSubset(const UnsortedList &list2) const;
+    UnsortedList difference(const UnsortedList& list2) const;
 };
 #endif
