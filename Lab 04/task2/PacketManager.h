@@ -21,6 +21,7 @@ private:
     
     void sortPacketsBubbleSort();
     void sortPacketsSelectionSort();
+    void sortPacketsInsertionSort();
     
 public:
     PacketManager(ifstream& fin);

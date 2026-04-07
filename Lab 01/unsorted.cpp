@@ -45,7 +45,7 @@ bool unsorted::remove(int index, int &val)
         return false;
 
     val = arr[index];
-    arr[index] = arr[currentSize - 1];
+    arr[index] = arr[currentSize - 1];//eg if we want to remove 3rd element we will replace it with last element and decrease the size of list by 1 and the last also will be removed as it is now in the place of 3rd element and we have decreased the size of list by 1 so last element will not be considered in the list anymore   
     currentSize--;
     return true;
 }

@@ -32,6 +32,7 @@ void addingLargeNumbers(char *num1, char *num2)
     while (!stack1.isEmpty() || !stack2.isEmpty())
     {
         int sum = carry;
+        
 
         if (!stack1.isEmpty())
         {

@@ -55,9 +55,9 @@ bool sorted::remove(int index, int &val)
 
     val = arr[index];
 
+
     for (int i = index; i < currentSize - 1; i++)
         arr[i] = arr[i + 1];
-
     currentSize--;
     return true;
 }

@@ -76,6 +76,22 @@ void PacketManager::sortPacketsSelectionSort()
     }
 }
 
+void PacketManager::sortPacketsInsertionSort()
+{
+    for (int i = 1; i < numPackets; i++)
+    {
+        Packet key = packets[i];
+        int j = i - 1;
+
+        while (j >= 0 && packets[j].position > key.position)
+        {
+            packets[j + 1] = packets[j];
+            j--;
+        }
+        packets[j + 1] = key;
+    }
+}
+
 void PacketManager::extractMessage()
 {
     char choice;
