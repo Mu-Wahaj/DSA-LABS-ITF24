@@ -1,0 +1,4 @@
+now make .cpp of this .h file and main also 
+dont use comments in .cpp and in main 
+dont use ======//// in cout or things in man 
+dont forget to use sir style as it is ok dont be too complxexx
