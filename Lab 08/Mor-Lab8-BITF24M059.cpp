@@ -104,9 +104,11 @@ void LinkedList::display()
 
 bool LinkedList::removeKthNode(int k, int &val)
 {
-	if (head == nullptr || k <= 0)
+
+	if (head == nullptr || k <= 0) //this check means either the list is empty or the position k is invalid (non-positive)
 		return false;
-	if (k == 1)
+
+	if (k == 1) //if k osition is one  then we need to remove the head node of the list. We store the value of the head node in val, update the head pointer to point to the next node, delete the old head node, and return true to indicate successful removal.
 	{
 		Node *temp = head;
 		val = temp->data;
@@ -115,13 +117,13 @@ bool LinkedList::removeKthNode(int k, int &val)
 		return true;
 	}
 	Node *current = head;
-	for (int i = 1; i < k - 1; i++)
+	for (int i = 1; i < k - 1; i++)  // This loop iterates through the list to find the (k-1)th node, which is the node just before the one we want to remove. If we reach the end of the list before finding the (k-1)th node, it means that the position k does not exist in the list, and we return false.
 	{
-		if (current->next == nullptr)
+		if (current->next == nullptr) // If current->next is nullptr, it means we have reached the end of the list before finding the (k-1)th node. This indicates that the position k does not exist in the list, so we return false.
 			return false;
-		current = current->next;
+		current = current->next; // If we successfully find the (k-1)th node, we move the current pointer to the next node in each iteration of the loop until we reach the (k-1)th node. After the loop, current will point to the (k-1)th node, which is the node just before the one we want to remove.
 	}
-	if (current->next == nullptr)
+	if (current->next == nullptr) //we can check this coditions onnce outside the loop because if current->next is nullptr, it means that there is no node at position k to remove, and we should return false.
 		return false;
 	Node *toDelete = current->next;
 	val = toDelete->data;
@@ -132,26 +134,26 @@ bool LinkedList::removeKthNode(int k, int &val)
 
 void LinkedList::combine(LinkedList &list1, LinkedList &list2)
 {
-	if (list1.head == nullptr && list2.head == nullptr)
+	if (list1.head == nullptr && list2.head == nullptr) //if both list1 and list2 are empty (i.e., their head pointers are nullptr), there are no nodes to combine, so we simply return without doing anything. This check prevents unnecessary operations when both lists are empty.
 	{
 		return;
 	}
-	else if (list1.head == nullptr)
+	else if (list1.head == nullptr) //if list1 is empty (i.e., its head pointer is nullptr), we can directly set the head of the combined list to the head of list2. After that, we set the head of list2 to nullptr to indicate that list2 is now empty, as its nodes have been transferred to the combined list.
 	{
 		head = list2.head;
 		list2.head = nullptr;
 	}
-	else if (list2.head == nullptr)
+	else if (list2.head == nullptr) // if list2 is empty (i.e., its head pointer is nullptr), we can directly set the head of the combined list to the head of list1. After that, we set the head of list1 to nullptr to indicate that list1 is now empty, as its nodes have been transferred to the combined list.
 	{
 		head = list1.head;
 		list1.head = nullptr;
 	}
 	else
 	{
-		head = list1.head;
-		list1.head = nullptr;
-		Node *tail = head;
-		while (tail->next != nullptr)
+		head = list1.head; // If both lists are non-empty, we set the head of the combined list to the head of list1. Then, we traverse to the end of list1 to find the last node (tail). Once we find the tail, we set its next pointer to the head of list2, effectively linking the two lists together. Finally, we set the head of list1 and list2 to nullptr to indicate that both lists are now empty, as their nodes have been transferred to the combined list.
+		list1.head = nullptr; //ths line is for safety to make sure that list1 is empty after combining, even though we have already set head to list1.head. This ensures that list1 does not retain any references to its original nodes, preventing potential issues with memory management or unintended modifications to the combined list through list1.
+		Node *tail = head; // for te traversal after setting head to list1.head, we initialize a tail pointer to the head of the combined list (which is now pointing to the head of list1). We will use this tail pointer to traverse through list1 until we reach the last node (the tail of list1).
+		while (tail->next != nullptr) //it finds the end of the lined list by checking if tail->next is not nullptr. If tail->next is not nullptr, it means there are more nodes in the list, and we move the tail pointer to the next node (tail = tail->next) until we reach the last node where tail->next is nullptr.
 		{
 			tail = tail->next;
 		}
@@ -160,20 +162,20 @@ void LinkedList::combine(LinkedList &list1, LinkedList &list2)
 	}
 }
 
-void LinkedList::shuffleMerge(LinkedList &list1, LinkedList &list2)
+void LinkedList::shuffleMerge(LinkedList &list1, LinkedList &list2)  // The shuffleMerge function takes two linked lists (list1 and list2) as input and merges them by alternating nodes from each list. The resulting merged list is stored in the current object (the one on which the function is called). After the merge, both input lists are emptied (their head pointers are set to nullptr).
 {
 	if (list1.head == nullptr && list2.head == nullptr)
 		return;
 	Node *curr1 = list1.head;
 	Node *curr2 = list2.head;
 	Node *tail = nullptr;
-	while (curr1 != nullptr && curr2 != nullptr)
+	while (curr1 != nullptr && curr2 != nullptr) // chaeck lists are empty 
 	{
-		Node *next1 = curr1->next;
+		Node *next1 = curr1->next; // createpointers for each list to move in front so that 
 		Node *next2 = curr2->next;
-		curr1->next = nullptr;
+		curr1->next = nullptr;// we set the next pointer of the current nodes (curr1 and curr2) to nullptr to detach them from their original lists. This is important because we will be re-linking these nodes in the merged list, and we want to ensure that they do not retain any connections to their original lists. By setting curr1->next and curr2->next to nullptr, we effectively isolate these nodes, allowing us to safely merge them into the new list without any unintended side effects from their previous connections.
 		curr2->next = nullptr;
-		if (head == nullptr)
+		if (head == nullptr)  // If the head of the merged list is nullptr, it means this is the first node being added to the merged list. In this case, we set the head to curr1 (the current node from list1) and then link curr1 to curr2 (the current node from list2). We also update the tail pointer to point to curr2, which is now the last node in the merged list.
 		{
 			head = curr1;
 			head->next = curr2;
